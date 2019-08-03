@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Leave@localhost">
+  <database-model serializer="dbm" dbms="MSSQL" family-id="MSSQL" format-version="4.15">
+    <root id="1">
+      <ServerVersion>10.50.4042</ServerVersion>
+    </root>
+    <database id="2" parent="1" name="Leave">
+      <ObjectId>7</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+      <Collation>Chinese_PRC_CI_AS</Collation>
+      <Fingerprint>7.43575/7018BC9D-9077-4622-BFB4-DA0B7D485CE6@DESKTOP-6RPPM7G</Fingerprint>
+    </database>
+    <database id="3" parent="1" name="ReportServer">
+      <ObjectId>5</ObjectId>
+      <Collation>Latin1_General_CI_AS_KS_WS</Collation>
+    </database>
+    <database id="4" parent="1" name="ReportServerTempDB">
+      <ObjectId>6</ObjectId>
+    </database>
+    <database id="5" parent="1" name="master">
+      <ObjectId>1</ObjectId>
+      <Collation>Chinese_PRC_CI_AS</Collation>
+    </database>
+    <database id="6" parent="1" name="model">
+      <ObjectId>3</ObjectId>
+      <Collation>Chinese_PRC_CI_AS</Collation>
+    </database>
+    <database id="7" parent="1" name="msdb">
+      <ObjectId>4</ObjectId>
+      <Collation>Chinese_PRC_CI_AS</Collation>
+    </database>
+    <database id="8" parent="1" name="tempdb">
+      <ObjectId>2</ObjectId>
+      <Collation>Chinese_PRC_CI_AS</Collation>
+    </database>
+    <schema id="9" parent="2" name="INFORMATION_SCHEMA">
+      <ObjectId>3</ObjectId>
+    </schema>
+    <schema id="10" parent="2" name="db_accessadmin">
+      <ObjectId>16385</ObjectId>
+    </schema>
+    <schema id="11" parent="2" name="db_backupoperator">
+      <ObjectId>16389</ObjectId>
+    </schema>
+    <schema id="12" parent="2" name="db_datareader">
+      <ObjectId>16390</ObjectId>
+    </schema>
+    <schema id="13" parent="2" name="db_datawriter">
+      <ObjectId>16391</ObjectId>
+    </schema>
+    <schema id="14" parent="2" name="db_ddladmin">
+      <ObjectId>16387</ObjectId>
+    </schema>
+    <schema id="15" parent="2" name="db_denydatareader">
+      <ObjectId>16392</ObjectId>
+    </schema>
+    <schema id="16" parent="2" name="db_denydatawriter">
+      <ObjectId>16393</ObjectId>
+    </schema>
+    <schema id="17" parent="2" name="db_owner">
+      <ObjectId>16384</ObjectId>
+    </schema>
+    <schema id="18" parent="2" name="db_securityadmin">
+      <ObjectId>16386</ObjectId>
+    </schema>
+    <schema id="19" parent="2" name="dbo">
+      <ObjectId>1</ObjectId>
+      <IntrospectionTimestamp>2019-08-04.07:56:42.193</IntrospectionTimestamp>
+      <Current>1</Current>
+      <Visible>1</Visible>
+      <DescriptionsCheckSum>85835141614</DescriptionsCheckSum>
+    </schema>
+    <schema id="20" parent="2" name="guest">
+      <ObjectId>2</ObjectId>
+    </schema>
+    <schema id="21" parent="2" name="sys">
+      <ObjectId>4</ObjectId>
+    </schema>
+    <table id="22" parent="19" name="AdminInfo">
+      <ObjectId>181575685</ObjectId>
+      <CreatedTimestamp>2017-09-24.23:13:05.840</CreatedTimestamp>
+      <ModifiedTimestamp>2017-09-24.23:13:05.840</ModifiedTimestamp>
+    </table>
+    <table id="23" parent="19" name="AdvanceDelay">
+      <ObjectId>1045578763</ObjectId>
+      <CreatedTimestamp>2019-02-16.01:25:59.860</CreatedTimestamp>
+      <ModifiedTimestamp>2019-02-16.01:25:59.977</ModifiedTimestamp>
+    </table>
+    <table id="24" parent="19" name="Class">
+      <ObjectId>949578421</ObjectId>
+      <CreatedTimestamp>2019-01-30.04:16:01.440</CreatedTimestamp>
+      <ModifiedTimestamp>2019-01-30.04:16:01.553</ModifiedTimestamp>
+    </table>
+    <table id="25" parent="19" name="College">
+      <ObjectId>117575457</ObjectId>
+      <CreatedTimestamp>2017-09-24.23:13:05.830</CreatedTimestamp>
+      <ModifiedTimestamp>2017-09-27.18:52:35.810</ModifiedTimestamp>
+    </table>
+    <table id="26" parent="19" name="Jurisdiction">
+      <ObjectId>85575343</ObjectId>
+      <CreatedTimestamp>2017-09-24.23:13:05.820</CreatedTimestamp>
+      <ModifiedTimestamp>2017-09-24.23:13:05.820</ModifiedTimestamp>
+    </table>
+    <table id="27" parent="19" name="LeaveRecord">
+      <ObjectId>629577281</ObjectId>
+      <CreatedTimestamp>2017-10-10.19:52:59.840</CreatedTimestamp>
+      <ModifiedTimestamp>2017-10-10.19:53:00.023</ModifiedTimestamp>
+    </table>
+    <table id="28" parent="19" name="Specialty">
+      <ObjectId>533576939</ObjectId>
+      <CreatedTimestamp>2017-09-27.18:45:51.623</CreatedTimestamp>
+      <ModifiedTimestamp>2019-01-30.04:11:42.223</ModifiedTimestamp>
+    </table>
+    <table id="29" parent="19" name="Students">
+      <ObjectId>1173579219</ObjectId>
+      <CreatedTimestamp>2019-07-21.23:44:31.007</CreatedTimestamp>
+      <ModifiedTimestamp>2019-07-21.23:44:31.030</ModifiedTimestamp>
+    </table>
+    <table id="30" parent="19" name="Teachers">
+      <ObjectId>1141579105</ObjectId>
+      <CreatedTimestamp>2019-07-21.23:44:28.543</CreatedTimestamp>
+      <ModifiedTimestamp>2019-07-21.23:44:28.710</ModifiedTimestamp>
+    </table>
+    <table id="31" parent="19" name="WeekDays">
+      <ObjectId>981578535</ObjectId>
+      <CreatedTimestamp>2019-02-14.08:22:06.770</CreatedTimestamp>
+      <ModifiedTimestamp>2019-02-14.08:22:06.893</ModifiedTimestamp>
+    </table>
+    <column id="32" parent="22" name="AdminID">
+      <Position>1</Position>
+      <Comment>管理员编号</Comment>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="22" name="AdminLoginID">
+      <Position>2</Position>
+      <Comment>登录名</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="22" name="AdnminPasssword">
+      <Position>3</Position>
+      <Comment>管理员密码</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="22" name="AdminName">
+      <Position>4</Position>
+      <Comment>管理员名称</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="22" name="AdminJurisdictionID">
+      <Position>5</Position>
+      <Comment>权限ID</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="37" parent="22" name="PK_AdminInfo">
+      <Position>1</Position>
+      <ColNames>AdminID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="38" parent="22" name="PK_AdminInfo">
+      <ObjectId>197575742</ObjectId>
+      <CreatedTimestamp>2017-09-24.23:13:05.840</CreatedTimestamp>
+      <ModifiedTimestamp>2017-09-24.23:13:05.840</ModifiedTimestamp>
+      <ColNames>AdminID</ColNames>
+      <UnderlyingIndexName>PK_AdminInfo</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="39" parent="23" name="ZCWGID">
+      <Position>1</Position>
+      <Comment>早出晚归编号</Comment>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="23" name="StudentNum">
+      <Position>2</Position>
+      <Comment>学生学号</Comment>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <column id="41" parent="23" name="ClassNum">
+      <Position>3</Position>
+      <Comment>学生班级ID</Comment>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <column id="42" parent="23" name="AdvanceTime">
+      <Position>4</Position>
+      <Comment>早出请假时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="43" parent="23" name="AdvanceReson">
+      <Position>5</Position>
+      <Comment>早出理由</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="44" parent="23" name="AdvanceStudentT">
+      <Position>6</Position>
+      <Comment>早出时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="45" parent="23" name="DelayTime">
+      <Position>7</Position>
+      <Comment>晚归请假时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="46" parent="23" name="DeatReson">
+      <Position>8</Position>
+      <Comment>晚归理由</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="47" parent="23" name="DelayStudentT">
+      <Position>9</Position>
+      <Comment>晚归时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <index id="48" parent="23" name="PK_AdvanceDelay">
+      <Position>1</Position>
+      <ColNames>ZCWGID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="49" parent="23" name="PK_AdvanceDelay">
+      <ObjectId>1061578820</ObjectId>
+      <CreatedTimestamp>2019-02-16.01:25:59.973</CreatedTimestamp>
+      <ModifiedTimestamp>2019-02-16.01:25:59.973</ModifiedTimestamp>
+      <ColNames>ZCWGID</ColNames>
+      <UnderlyingIndexName>PK_AdvanceDelay</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="50" parent="24" name="ClassID">
+      <Position>1</Position>
+      <Comment>班级编号</Comment>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="24" name="ClassName">
+      <Position>2</Position>
+      <Comment>班级名称</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="24" name="ClassSpecialityID">
+      <Position>3</Position>
+      <Comment>所属专业</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="24" name="ClassHeadTeacherID">
+      <Position>4</Position>
+      <Comment>班主任Id</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="24" name="ClassNum">
+      <Position>5</Position>
+      <Comment>班级id(专业ID+年级+班级)</Comment>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <column id="55" parent="24" name="ClassSpecialityTeacherID">
+      <Position>6</Position>
+      <Comment>班级辅导员ID</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="56" parent="24" name="PK_Class">
+      <Position>1</Position>
+      <ColNames>ClassID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="57" parent="24" name="PK_Class">
+      <ObjectId>965578478</ObjectId>
+      <CreatedTimestamp>2019-01-30.04:16:01.553</CreatedTimestamp>
+      <ModifiedTimestamp>2019-01-30.04:16:01.553</ModifiedTimestamp>
+      <ColNames>ClassID</ColNames>
+      <UnderlyingIndexName>PK_Class</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="58" parent="25" name="CollegeID">
+      <Position>1</Position>
+      <Comment>学院编号</Comment>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="25" name="CollegeName">
+      <Position>2</Position>
+      <Comment>学院名称</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="25" name="CollegeNum">
+      <Position>3</Position>
+      <Comment>学院id</Comment>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <column id="61" parent="25" name="TeacherNum">
+      <Position>4</Position>
+      <Comment>院领导ID</Comment>
+      <DataType>varchar(12 char)|0s</DataType>
+    </column>
+    <index id="62" parent="25" name="PK_Dep1">
+      <Position>1</Position>
+      <ColNames>CollegeID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="63" parent="25" name="PK_Dep1">
+      <ObjectId>133575514</ObjectId>
+      <CreatedTimestamp>2017-09-24.23:13:05.830</CreatedTimestamp>
+      <ModifiedTimestamp>2017-09-24.23:13:05.830</ModifiedTimestamp>
+      <ColNames>CollegeID</ColNames>
+      <UnderlyingIndexName>PK_Dep1</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="64" parent="26" name="JuscID">
+      <Position>1</Position>
+      <Comment>ID</Comment>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="26" name="JuscNames">
+      <Position>2</Position>
+      <Comment>权限名称</Comment>
+      <DataType>nvarchar(20 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="66" parent="26" name="Jurisdictions">
+      <Position>3</Position>
+      <Comment>权限范围</Comment>
+      <DataType>nvarchar(50 char)|0s</DataType>
+    </column>
+    <index id="67" parent="26" name="PK_Jurisdiction">
+      <Position>1</Position>
+      <ColNames>JuscID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="68" parent="26" name="PK_Jurisdiction">
+      <ObjectId>101575400</ObjectId>
+      <CreatedTimestamp>2017-09-24.23:13:05.823</CreatedTimestamp>
+      <ModifiedTimestamp>2017-09-24.23:13:05.823</ModifiedTimestamp>
+      <ColNames>JuscID</ColNames>
+      <UnderlyingIndexName>PK_Jurisdiction</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="69" parent="27" name="LeaveRecordID">
+      <Position>1</Position>
+      <Comment>编号</Comment>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="70" parent="27" name="LeaveRecordStudentID">
+      <Position>2</Position>
+      <Comment>学生ID</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="27" name="LeaveRecordReason">
+      <Position>3</Position>
+      <Comment>请假事由</Comment>
+      <DataType>varchar(200 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="72" parent="27" name="LeaveRecordStartTime">
+      <Position>4</Position>
+      <Comment>开始时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="73" parent="27" name="LeaveRecordEndtTime">
+      <Position>5</Position>
+      <Comment>结束时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="74" parent="27" name="LeaveRecordStartLesson">
+      <Position>6</Position>
+      <Comment>第几节课开始</Comment>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="75" parent="27" name="LeaveRecordEndLesson">
+      <Position>7</Position>
+      <Comment>第几节课结束</Comment>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="76" parent="27" name="LeaveRecordCategory">
+      <Position>8</Position>
+      <Comment>请假类别</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="77" parent="27" name="LeaveRecordNumDays">
+      <Position>9</Position>
+      <Comment>请假天数</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="78" parent="27" name="LeaveRecordApprover">
+      <Position>10</Position>
+      <Comment>审批人</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="79" parent="27" name="LeaveRecordStage">
+      <Position>11</Position>
+      <Comment>审批阶段</Comment>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="80" parent="27" name="LeaveRecordApprovalResult">
+      <Position>12</Position>
+      <Comment>审批结果</Comment>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <column id="81" parent="27" name="LeaveRecordApprovalTime">
+      <Position>13</Position>
+      <Comment>审批时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="82" parent="27" name="LeaveRecordSumLesson">
+      <Position>14</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="83" parent="27" name="LeaveRecordClassNum">
+      <Position>15</Position>
+      <Comment>关联班级id</Comment>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <index id="84" parent="27" name="PK_LeaveRecord">
+      <Position>1</Position>
+      <ColNames>LeaveRecordID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="85" parent="27" name="PK_LeaveRecord">
+      <ObjectId>645577338</ObjectId>
+      <CreatedTimestamp>2017-10-10.19:53:00.027</CreatedTimestamp>
+      <ModifiedTimestamp>2017-10-10.19:53:00.027</ModifiedTimestamp>
+      <ColNames>LeaveRecordID</ColNames>
+      <UnderlyingIndexName>PK_LeaveRecord</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="86" parent="28" name="SpecialtyID">
+      <Position>1</Position>
+      <Comment>专业编号</Comment>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="87" parent="28" name="SpecialtyName">
+      <Position>2</Position>
+      <Comment>专业名称</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="88" parent="28" name="SpecialtyCollegeID">
+      <Position>3</Position>
+      <Comment>所属学院Id</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="89" parent="28" name="SpecialtyNum">
+      <Position>4</Position>
+      <Comment>专业id</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <index id="90" parent="28" name="PK_Dep2">
+      <Position>1</Position>
+      <ColNames>SpecialtyID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="91" parent="28" name="PK_Dep2">
+      <ObjectId>549576996</ObjectId>
+      <CreatedTimestamp>2017-09-27.18:45:52.270</CreatedTimestamp>
+      <ModifiedTimestamp>2017-09-27.18:45:52.270</ModifiedTimestamp>
+      <ColNames>SpecialtyID</ColNames>
+      <UnderlyingIndexName>PK_Dep2</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="92" parent="29" name="StudentID">
+      <Position>1</Position>
+      <Comment>学生编号</Comment>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="93" parent="29" name="StudentNum">
+      <Position>2</Position>
+      <Comment>学号</Comment>
+      <DataType>varchar(10 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="94" parent="29" name="open_id">
+      <Position>3</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="95" parent="29" name="StudentPass">
+      <Position>4</Position>
+      <Comment>学生密码</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="96" parent="29" name="StudentName">
+      <Position>5</Position>
+      <Comment>学生姓名</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="97" parent="29" name="StudentSex">
+      <Position>6</Position>
+      <Comment>学生性别</Comment>
+      <DataType>varchar(2 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="98" parent="29" name="StudentTel">
+      <Position>7</Position>
+      <Comment>学生电话</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="99" parent="29" name="StudentClassID">
+      <Position>8</Position>
+      <Comment>学生班级ID</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="100" parent="29" name="StudentIDCard">
+      <Position>9</Position>
+      <Comment>身份证</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="101" parent="29" name="StudentBedroomNum">
+      <Position>10</Position>
+      <Comment>寝室号</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="102" parent="29" name="StudentParentTel">
+      <Position>11</Position>
+      <Comment>父母一方的联系方式</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="103" parent="29" name="StudentHomeAddress">
+      <Position>12</Position>
+      <Comment>家庭住址</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="104" parent="29" name="StudentApprover">
+      <Position>13</Position>
+      <Comment>审批人</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="105" parent="29" name="StudentApprovalResult">
+      <Position>14</Position>
+      <Comment>审批结果</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="106" parent="29" name="StudentApprovalTime">
+      <Position>15</Position>
+      <Comment>审批时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <index id="107" parent="29" name="PK_Student">
+      <Position>1</Position>
+      <ColNames>StudentID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="108" parent="29" name="PK_Student">
+      <ObjectId>1189579276</ObjectId>
+      <CreatedTimestamp>2019-07-21.23:44:31.023</CreatedTimestamp>
+      <ModifiedTimestamp>2019-07-21.23:44:31.023</ModifiedTimestamp>
+      <ColNames>StudentID</ColNames>
+      <UnderlyingIndexName>PK_Student</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="109" parent="30" name="TeacherID">
+      <Position>1</Position>
+      <Comment>编号</Comment>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="110" parent="30" name="TeacherNum">
+      <Position>2</Position>
+      <Comment>工号</Comment>
+      <DataType>varchar(12 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="111" parent="30" name="open_id">
+      <Position>3</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="112" parent="30" name="TeacherPass">
+      <Position>4</Position>
+      <Comment>教师密码</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="113" parent="30" name="TeacherName">
+      <Position>5</Position>
+      <Comment>教师名称</Comment>
+      <DataType>varchar(30 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="114" parent="30" name="TeacherSex">
+      <Position>6</Position>
+      <Comment>教师性别</Comment>
+      <DataType>varchar(2 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="115" parent="30" name="TeacherTel">
+      <Position>7</Position>
+      <Comment>教师电话</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="116" parent="30" name="Post">
+      <Position>8</Position>
+      <Comment>职称</Comment>
+      <DataType>varchar(100 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="117" parent="30" name="TeacherIDCard">
+      <Position>9</Position>
+      <Comment>身份证&#xd;
+</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="118" parent="30" name="TeacherApprover">
+      <Position>10</Position>
+      <Comment>审批人</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="119" parent="30" name="TeacherApprovalResult">
+      <Position>11</Position>
+      <Comment>审批结果</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="120" parent="30" name="TeacherApprovalTime">
+      <Position>12</Position>
+      <Comment>审批时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <index id="121" parent="30" name="PK_Teachers">
+      <Position>1</Position>
+      <ColNames>TeacherID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="122" parent="30" name="PK_Teachers">
+      <ObjectId>1157579162</ObjectId>
+      <CreatedTimestamp>2019-07-21.23:44:28.710</CreatedTimestamp>
+      <ModifiedTimestamp>2019-07-21.23:44:28.710</ModifiedTimestamp>
+      <ColNames>TeacherID</ColNames>
+      <UnderlyingIndexName>PK_Teachers</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="123" parent="31" name="WeekDaysID">
+      <Position>1</Position>
+      <Comment>周六请假编号</Comment>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="124" parent="31" name="WeekDaysStudentID">
+      <Position>2</Position>
+      <Comment>学号</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="125" parent="31" name="WeekDaysStartTime">
+      <Position>3</Position>
+      <Comment>请假开始时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="126" parent="31" name="WeekDaysEndtTime">
+      <Position>4</Position>
+      <Comment>请假结束时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="127" parent="31" name="WeekDaysNumDays">
+      <Position>5</Position>
+      <Comment>请假天数</Comment>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <column id="128" parent="31" name="WeekDaysReason">
+      <Position>6</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="129" parent="31" name="WeekDaysApprover">
+      <Position>7</Position>
+      <Comment>审批人</Comment>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="130" parent="31" name="WeekDaysStage">
+      <Position>8</Position>
+      <Comment>审批阶段</Comment>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <column id="131" parent="31" name="WeekDaysApprovalResult">
+      <Position>9</Position>
+      <Comment>审批结果</Comment>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <column id="132" parent="31" name="WeekDaysApprovalTime">
+      <Position>10</Position>
+      <Comment>审批时间</Comment>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="133" parent="31" name="LeaveRecordClassNum">
+      <Position>11</Position>
+      <Comment>关联班级id</Comment>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <index id="134" parent="31" name="PK_WeekDays">
+      <Position>1</Position>
+      <ColNames>WeekDaysID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="135" parent="31" name="PK_WeekDays">
+      <ObjectId>997578592</ObjectId>
+      <CreatedTimestamp>2019-02-14.08:22:06.890</CreatedTimestamp>
+      <ModifiedTimestamp>2019-02-14.08:22:06.890</ModifiedTimestamp>
+      <ColNames>WeekDaysID</ColNames>
+      <UnderlyingIndexName>PK_WeekDays</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
