@@ -3,7 +3,7 @@ package com.LeaveSystem.model;
 
 public class AdvanceDelay {
 
-  private long zcwgid;
+  private int zcwgid;
   private String studentNum;
   private String classNum;
   private java.sql.Timestamp advanceTime;
@@ -14,11 +14,11 @@ public class AdvanceDelay {
   private java.sql.Timestamp delayStudentT;
 
 
-  public long getZcwgid() {
+  public int getZcwgid() {
     return zcwgid;
   }
 
-  public void setZcwgid(long zcwgid) {
+  public void setZcwgid(int zcwgid) {
     this.zcwgid = zcwgid;
   }
 

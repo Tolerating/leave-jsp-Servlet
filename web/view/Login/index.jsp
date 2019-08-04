@@ -63,11 +63,11 @@
   </div>
 </div>
 <!-- jQuery -->
-<script src="../Scripts/jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
+<script src="../../Scripts/jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
 <!-- Bootstrap -->
 <script src="../../Scripts/bootstrap/js/bootstrap.min.js"></script>
 <!-- md5加密 -->
-<script src="../Scripts/jquery-md5/jQuery.md5.js" type="text/javascript"></script>
+<script src="../../Scripts/jquery-md5/jQuery.md5.js" type="text/javascript"></script>
 <!-- 提示框 -->
 <script src="../../Scripts/messenger-1.4.1/build/js/messenger.min.js" type="text/javascript"></script>
 <script src="../../Scripts/messenger-1.4.1/build/js/messenger-theme-future.js" type="text/javascript"></script>
@@ -96,16 +96,19 @@
     } else if (userPwd.trim() == "") {
       layer.msg('密码不能为空', { icon: 5 });
     } else {
-      username += post;
+      if (post != 0){
+        username += post;
+      }
       var pwd = $.md5(userPwd);
       $.ajax({
-        url:'../WebService.asmx/loginLeave',
+        url:'http://localhost:8080/login',
         type: "POST",
-        contentType: "application/json",
+        contentType: "application/x-www-form-urlencoded",
         datatype: "json",
-        data: "{Name:'" + username + "',Pwd:'" + pwd + "',Post:'" + postName.options[postName.selectedIndex].text + "'}",
+        data: {Name:username ,Pwd: pwd,Post:postName.options[postName.selectedIndex].text ,oper:"loginLeave"},
         success: function (data, textstatus, jqXHR) {
-          if (JSON.parse(data.d) == -1) {
+          console.log(data)
+          if (data.d == -1) {
             Messenger().post({ message: "用户民或密码错误!", showCloseButton: true, hideAfter: 5, type: "error" });
           } else {
             Messenger().post({ message: "登录成功!", showCloseButton: true, hideAfter: 5, type: "success" });
@@ -113,7 +116,7 @@
             sessionStorage.DataLoginID = username;      //加了职称数字的
             sessionStorage.Post = postName.options[postName.selectedIndex].text;
             sessionStorage.Pwd = pwd;
-            location.href = "/Manage/PageManage";
+            location.href = "../Student/StudentInfo.jsp";
           }
         },
         error: function (jqXHR, status, error) {

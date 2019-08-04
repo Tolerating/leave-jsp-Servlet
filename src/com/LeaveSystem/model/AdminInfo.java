@@ -28,7 +28,7 @@ public class AdminInfo {
     }
 
     public void setAdminID(int adminID) {
-        AdminID = adminID;
+        this.AdminID = adminID;
     }
 
     public int getAdminLoginID() {
@@ -36,7 +36,7 @@ public class AdminInfo {
     }
 
     public void setAdminLoginID(int adminLoginID) {
-        AdminLoginID = adminLoginID;
+        this.AdminLoginID = adminLoginID;
     }
 
     public String getAdnminPasssword() {
@@ -44,7 +44,7 @@ public class AdminInfo {
     }
 
     public void setAdnminPasssword(String adnminPasssword) {
-        AdnminPasssword = adnminPasssword;
+        this.AdnminPasssword = adnminPasssword;
     }
 
     public String getAdminName() {
@@ -52,7 +52,7 @@ public class AdminInfo {
     }
 
     public void setAdminName(String adminName) {
-        AdminName = adminName;
+        this.AdminName = adminName;
     }
 
     public String getAdminJurisdictionID() {
@@ -60,7 +60,7 @@ public class AdminInfo {
     }
 
     public void setAdminJurisdictionID(String adminJurisdictionID) {
-        AdminJurisdictionID = adminJurisdictionID;
+        this.AdminJurisdictionID = adminJurisdictionID;
     }
 
 
