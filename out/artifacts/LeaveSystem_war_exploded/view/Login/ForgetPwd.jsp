@@ -42,16 +42,6 @@
                             <input name="userName" id="username" class="form-control" placeholder="工号" />
                         </div>
                         <div class="form-group">
-                            <select id="DropDownList" class="form-control form-select">
-                                <option value="0">学生</option>
-                                <option value="1">班主任</option>
-                                <option value="2">辅导员</option>
-                                <option value="3">院领导</option>
-                                <option value="4">校领导</option>
-                                <option value="5">公寓中心</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label>验证码</label>
                             <input type="text" name="mobile" style="width:272px;" id="Code" placeholder="请输入验证码" class="form-control margin-top-5" />
                             <input type="button" name="sendCode" id="btn_code" style="width:272px" value="发送验证码到手机" onclick="btncode()" class="button button-small" />
@@ -77,29 +67,17 @@
 <script>
     function btncode() {
         var username = document.getElementById("username").value.trim();
-        var post = document.getElementById("DropDownList").value;
         if (username == "") {
             layer.alert('工号不能为空！', { icon: 5 }, function (index) {
                 layer.close(index);
             });
         } else {
-            if (post == "1") {
-                username += "1";
-            } else if (post == "2") {
-                username += "2";
-            } else if (post == "3") {
-                username += 3;
-            } else if (post == "4") {
-                username += 4;
-            } else if(post == "5"){
-                username += 5;
-            }
             $.ajax({
-                url: "/LoginModule/btnSendcode",
+                url: "http://localhost:8080/login",
                 type: "POST",
                 dataType: "json",
-                contentType: "application/json",
-                data: "{UserName:'" + username + "',Post:'" + post + "'}",
+                contentType: "application/x-www-form-urlencoded",
+                data: {studentNum:username,oper:"forgetPwd"},
                 success: function (data, status, jqXHR) {
                     if (data == -7) {
                         layer.alert('用户名不存在', { icon: 5 }, function (index) {
@@ -123,7 +101,6 @@
 
     function btnSendPwd() {
         var username = document.getElementById("username").value.trim();
-        var post = document.getElementById("DropDownList").value;
         var code = document.getElementById("Code").value.trim();
         if (username == "") {
             layer.alert('学号/工号不能为空！', { icon: 5 }, function (index) {
@@ -134,16 +111,12 @@
                 layer.close(index);
             });
         } else {
-            var UserID = username;
-            if (post != "0") {
-                UserID += post;
-            }
             $.ajax({
-                url: "/LoginModule/btnsend",
+                url: "http://localhost:8080/login",
                 type: "POST",
                 dataType: "json",
-                contentType: "application/json",
-                data: "{UserName:'" + UserID + "',Code:'"+code+"'}",
+                contentType: "application/x-www-form-urlencoded",
+                data: {studentNum:username,Code:code,oper:"checkCode"},
                 success: function (data, status, jqXHR) {
                     //console.log(data);
                     if (data == -1) {
@@ -153,12 +126,8 @@
                     } else if (data == -2) {
                         layer.msg('用户名错误', { icon: 5 });
                     } else {
-                        if (username.length == 9) {
-                            location.href = "/LoginModule/NewPwd?id=" + username;
-                        } else {
-                            location.href = "/LoginModule/NewPwd?id=" + username.slice(0, 9) + "&post=" + post;
-                        }
-
+                        location.href = "./NewPwd.jsp?id=" + username;
+                        //alert("123");
                     }
                 },
                 error: function (jqXHR, status, error) {

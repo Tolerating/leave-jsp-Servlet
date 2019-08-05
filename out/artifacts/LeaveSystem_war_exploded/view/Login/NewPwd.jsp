@@ -41,10 +41,7 @@
                         <div class="form-group">
                             <label>工号</label>
                             <i class="fa fa-user"></i>
-                            <input type="text" readonly value="" name="userId">
-<%--                            @Html.TextBox("userId", ViewData["userid"], new { ReadOnly = true })--%>
-                            <input type="hidden" name="post">
-<%--                            @Html.Hidden("post",ViewData["Post"])--%>
+                            <input type="text" readonly value="<%= request.getParameter("id") %>" id="userId" name="userId">
                         </div>
                         <div class="form-group">
                             <label>新密码</label>
@@ -83,7 +80,6 @@
         methods: {
             btnSendpwd: function () {
                 var username = document.getElementById("userId").value;
-                var post = document.getElementById("post").value;
                 if (this.pwdone == "" || this.pwdtwo == "") {
                     layer.alert('密码不可以为空，请输入！', { icon: 2 }, function (index) {
                         layer.close(index);
@@ -97,25 +93,22 @@
                         layer.close(index);
                     });
                 } else {
-                    if (post != "" || post != "0") {
-                        username += post;
-                    }
                     $.ajax({
-                        url: '../WebService.asmx/updatePwd',
-                        contentType: "application/json",
+                        url: 'http://localhost:8080/login',
+                        contentType: "application/x-www-form-urlencoded",
                         type: "POST", dataType: "json",
-                        data: '{ID:"' + username + '",passnew:"' + $.md5(this.pwdtwo) + '",Post:"'+post+'"}',
+                        data: {studentNum:username ,passnew:$.md5(this.pwdtwo),oper:"updatePwd"},
                         success: function (data) {
                             console.log(data);
-                            if (data.d == 1) {
+                            if (data == 1) {
                                 layer.alert('密码修改成功！', { icon: 1 }, function (index) {
                                     layer.close(index);
-                                    location.href = "/LoginModule/Login";
+                                    location.href = "./index.jsp";
                                 });
                             } else {
-                                layer.alert('111服务正忙，请稍后再试！', { icon: 2 }, function (index) {
+                                layer.alert('服务器正忙，请稍后再试！', { icon: 2 }, function (index) {
                                     layer.close(index);
-                                    location.href = "/LoginModule/Login";
+                                    location.href = "./index.jsp";
                                 });
                             }
                         },

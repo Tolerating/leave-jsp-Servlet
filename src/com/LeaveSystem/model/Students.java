@@ -1,4 +1,4 @@
-package com.sample;
+package com.LeaveSystem.model;
 
 
 public class Students {

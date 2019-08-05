@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30"><!-- 每30秒检查一次配置文件，并重新加载 -->
+    <Appenders><!-- 输出源，简单说就是输出到哪里,下面配置了三个输出源 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingFile name="RollingFile" fileName="${log4j:configParentLocation}/logs/app.log"
+                     filePattern="${log4j:configParentLocation}/logs/$${date:MM-dd-yyyy}.%i.log.gz">  <!-- 大于10M时压缩文件日志文件存放在 WEB-INF\classes\logs\文件夹下面 -->
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="10MB"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers><!-- 配置日志记录器，记录级别等内容  -->
+        <Root level="DEBUG">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -108,7 +108,7 @@
         data: {Name:username ,Pwd: pwd,Post:postName.options[postName.selectedIndex].text ,oper:"loginLeave"},
         success: function (data, textstatus, jqXHR) {
           console.log(data)
-          if (data.d == -1) {
+          if (data == -1) {
             Messenger().post({ message: "用户民或密码错误!", showCloseButton: true, hideAfter: 5, type: "error" });
           } else {
             Messenger().post({ message: "登录成功!", showCloseButton: true, hideAfter: 5, type: "success" });
