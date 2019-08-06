@@ -6,8 +6,8 @@ public class LeaveRecord {
   private long leaveRecordId;
   private long leaveRecordStudentId;
   private String leaveRecordReason;
-  private java.sql.Timestamp leaveRecordStartTime;
-  private java.sql.Timestamp leaveRecordEndtTime;
+  private String leaveRecordStartTime;
+  private String leaveRecordEndtTime;
   private long leaveRecordStartLesson;
   private long leaveRecordEndLesson;
   private String leaveRecordCategory;
@@ -47,20 +47,20 @@ public class LeaveRecord {
   }
 
 
-  public java.sql.Timestamp getLeaveRecordStartTime() {
+  public String getLeaveRecordStartTime() {
     return leaveRecordStartTime;
   }
 
-  public void setLeaveRecordStartTime(java.sql.Timestamp leaveRecordStartTime) {
+  public void setLeaveRecordStartTime(String leaveRecordStartTime) {
     this.leaveRecordStartTime = leaveRecordStartTime;
   }
 
 
-  public java.sql.Timestamp getLeaveRecordEndtTime() {
+  public String getLeaveRecordEndtTime() {
     return leaveRecordEndtTime;
   }
 
-  public void setLeaveRecordEndtTime(java.sql.Timestamp leaveRecordEndtTime) {
+  public void setLeaveRecordEndtTime(String leaveRecordEndtTime) {
     this.leaveRecordEndtTime = leaveRecordEndtTime;
   }
 

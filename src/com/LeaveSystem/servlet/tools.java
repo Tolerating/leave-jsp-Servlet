@@ -8,6 +8,46 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class tools {
+
+    /**
+     * 生成短信模板并发送短信
+     * @param RecordCategory 请假类别
+     * @param TeacherTel 教师电话
+     * @param TeacherName 教师姓名
+     * @param StudentName 学生姓名
+     * @param StudentNum 学生学号
+     * @param LeaveRecordReason 请假事由
+     * @param LeaveRecordSumLesson 请假节数
+     * @param LeaveRecordStartTime 请假开始时间
+     * @param LeaveRecordStartLesson 请假节数节数
+     * @param LeaveRecordEndtTime 请假结束时间
+     * @param LeaveRecordEndLesson 请假结束节数
+     * @param LeaveRecordNumDays 请假天数
+     * @return String
+     */
+    public static String compStuContent(String RecordCategory, String TeacherTel, String TeacherName, String StudentName, long StudentNum, String LeaveRecordReason, long LeaveRecordSumLesson, String LeaveRecordStartTime, long LeaveRecordStartLesson, String LeaveRecordEndtTime, long LeaveRecordEndLesson, long LeaveRecordNumDays)
+    {
+        String contents;
+        if ("1".equals(RecordCategory))
+        {
+            contents = "【温科院】" + TeacherName + "教师您好，您的学生" + StudentName + "(" + StudentNum + ")上课请假：因(" + LeaveRecordReason + ")事由，需请假(" + LeaveRecordSumLesson + ")节课,请假时间：" + LeaveRecordStartTime + "到" + LeaveRecordEndtTime + "止，共请假(" + LeaveRecordNumDays + ")天。请尽快予以批复。http://qj.wzvcst.edu.cn";
+        }
+        else if ("2".equals(RecordCategory))
+        {
+            contents = "【温科院】" + TeacherName + "教师您好，您的学生" + StudentName + "(" + StudentNum + ")不留宿请假：因(" + LeaveRecordReason + ")事由，需请假(" + LeaveRecordNumDays + ")天不留宿住校，请予以批准,请假时间：" + LeaveRecordStartTime + "到" + LeaveRecordEndtTime + "止。 请尽快予以批复。http://qj.wzvcst.edu.cn";
+        }
+        else if ("3".equals(RecordCategory))
+        {
+            contents = "【温科院】" + TeacherName + "教师您好，您的学生" + StudentName + "(" + StudentNum + ")早自习请假：因(" + LeaveRecordReason + ")事由，需请假(" + LeaveRecordNumDays + ")天早自习，请予以批准,请假时间：" + LeaveRecordStartTime + "到" + LeaveRecordEndtTime + "止。 请尽快予以批复。http://qj.wzvcst.edu.cn";
+        }
+        else
+        {
+            contents= "【温科院】" + TeacherName + "教师您好，您的学生" + StudentName + "(" + StudentNum + ")周末请假：因(" + LeaveRecordReason + ")事由，需请假周六周日(2)天，请予以批准,请假时间：" + LeaveRecordStartTime + "到" + LeaveRecordEndtTime + "止。 请尽快予以批复。http://qj.wzvcst.edu.cn";
+        }
+        return "1";
+        //return sendMSG(TeacherTel,contents);
+    }
+
     /**
      *  发送短信
      * @param tel 电话

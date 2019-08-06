@@ -14,7 +14,7 @@
     <link href="../../Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../Scripts/timedemo/css/asDatepicker.css" rel="stylesheet" />
     <link href="../../Scripts/bootstrap-datetimepicker/new/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    <title>@ViewBag.Title</title>
+    <title>请假界面</title>
     <style>
         [v-cloak] {
             display:none;
@@ -474,10 +474,10 @@
             /*早出晚归*/
             arriveEarly: false,
             canAdvance:false,               //早出是否disabled
-            arriveEarlypath: "../Content/img/1.png",     //早出图片路径
+            arriveEarlypath: "/Content/img/2.png",     //早出图片路径
             arriveLate: false,
             canDelay: false,             //晚归是否disabled
-            arriveLatepath: "../Content/img/1.png",      //晚归图片路径
+            arriveLatepath: "/Content/img/2.png",      //晚归图片路径
             arriveEarlyReason: "",
             arriveLateReason: "",
             canAdvanceDelaybtn: false,    //判断当前时间是否可以请假
@@ -506,18 +506,18 @@
                 }else {
                     //**********************************
                     var leaveRecordobj = JSON.stringify({
-                        LeaveRecordStudentID: this.StudentNum,
-                        LeaveRecordReason: this.lessonReason,
-                        LeaveRecordStartTime: lesssonStaTime,
-                        LeaveRecordEndtTime: lessonEndTime,
-                        LeaveRecordStartLesson: 0,
-                        LeaveRecordEndLesson:0,
-                        LeaveRecordCategory: "1",
-                        LeaveRecordNumDays: getdayNum(lessonEndTime, lesssonStaTime),
-                        LeaveRecordStage: 1,
-                        LeaveRecordApprovalResult: "待审核",
-                        LeaveRecordSumLesson: this.lessonNum,
-                        LeaveRecordClassNum: this.classID
+                        leaveRecordStudentId: this.StudentNum,
+                        leaveRecordReason: this.lessonReason,
+                        leaveRecordStartTime: lesssonStaTime,
+                        leaveRecordEndtTime: lessonEndTime,
+                        leaveRecordStartLesson: 0,
+                        leaveRecordEndLesson:0,
+                        leaveRecordCategory: "1",
+                        leaveRecordNumDays: getdayNum(lessonEndTime, lesssonStaTime),
+                        leaveRecordStage: 1,
+                        leaveRecordApprovalResult: "待审核",
+                        leaveRecordSumLesson: this.lessonNum,
+                        leaveRecordClassNum: this.classID
                     });
                     layer.msg('上课请假:因(' + this.lessonReason + ')事由，需请假<br />(' + this.lessonNum + ')节课,请假时间：' + lesssonStaTime + '<br />到' + lessonEndTime + '止,总计' + getdayNum(lessonEndTime, lesssonStaTime) +'天。', {
                         time: 0 //不自动关闭
@@ -525,18 +525,20 @@
                         , yes: function (index) {
                             layer.close(index);
                             $.ajax({
-                                url: '../WebService.asmx/insertLeaveRecord', contentType: "application/json", type: "POST", dataType: "json",
-                                data: "{Data:'" + leaveRecordobj + "',TeacherID:'"+ vm.ClassHeadTeacherID+"',StudentName:'"+vm.StudentName+"'}",
+                                url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded", type: "POST", dataType: "json",
+                                data: {Data:leaveRecordobj,TeacherID:vm.ClassHeadTeacherID,StudentName:vm.StudentName,oper:"insertLeaveRecord"},
                                 success: function (data,status,jqXHR) {
-                                    if (data.d > "0") {
+                                    if (data > "0") {
                                         layer.alert('提交请假单成功', { icon: 1 }, function (index) {
                                             layer.close(index);
-                                            location.href = "/Stuleave/Home";
+                                            location.href = "./Home.jsp";
                                         });
-                                    } else {
+                                    } else if(data == "404"){
+                                        window.location.href = "../Login/index.jsp";
+                                    }else {
                                         layer.alert('提交请假单失败', { icon: 1 }, function (index) {
                                             layer.close(index);
-                                            location.href = "/Stuleave/Home";
+                                            location.href = "./Home.jsp";
                                         });
                                     }
                                 },
@@ -565,14 +567,14 @@
                     });
                 } else {
                     $.ajax({
-                        url: '../WebService.asmx/SelectCountByCondition',
-                        contentType: "application/json",
+                        url: 'http://localhost:8080/login',
+                        contentType: "application/x-www-form-urlencoded",
                         dataType:"json",
                         type: "POST",
-                        data: "{starttime:'" + weekdayStartTime + "',endtime:'" + weekdayEndTime + "'}",
+                        data: {starttime:weekdayStartTime,endtime:weekdayEndTime,oper:"checkWeekLeave"},
                         async:false,
                         success: function (data,status,jqXHR) {
-                            if (data.d == "0") {
+                            if (data == "0") {
                                 if (vm.fridayLeave == true && vm.saturdayLeave == true) {
                                     if (vm.weekdayReason != "其他") {
                                         comment = '周五,六晚不留宿请假：' + weekdayStartTime + '(周五)晚至' + weekdayEndTime + '(周六)晚。</br>' + '请假理由:' + vm.weekdayReason + "。";
@@ -618,15 +620,17 @@
                                     , yes: function (index) {
                                         layer.close(index);
                                         $.ajax({
-                                            url: '/WebService.asmx/InsertWeekDays', contentType: "application/json", type: "POST", dataType: "json",
-                                            data: "{Data:'" + weekdayLeaveobj + "'}",
+                                            url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded", type: "POST", dataType: "json",
+                                            data: {Data:weekdayLeaveobj,oper:"InsertWeekDays"},
                                             success: function (data) {
-                                                if (data.d == "1") {
+                                                if (data == "1") {
                                                     layer.alert('提交请假单成功', { icon: 1 }, function (index) {
                                                         layer.close(index);
                                                         location.href = "/Stuleave/Home";
                                                     });
-                                                } else {
+                                                } else if(data == "404"){
+                                                    window.location.href = "../Login/index.jsp";
+                                                }else {
                                                     layer.alert('提交请假单失败', { icon: 2 }, function (index) {
                                                         layer.close(index);
                                                     });
@@ -641,7 +645,9 @@
                                     }
                                 });
 
-                            } else {
+                            }else if(data == "404"){
+                                window.location.href = "../Login/index.jsp";
+                            }else {
                                 layer.alert('请勿重复提交请假', { icon: 2 }, function (index) {
                                     layer.close(index);
                                 });
@@ -684,15 +690,17 @@
                         , yes: function (index) {
                             layer.close(index);
                             $.ajax({
-                                url: '../WebService.asmx/insertLeaveRecord', contentType: "application/json", type: "POST", dataType: "json",
-                                data: "{Data:'" + notStayLeaveobj + "',TeacherID:'" + vm.ClassHeadTeacherID + "',StudentName:'" + vm.StudentName + "'}",
+                                url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded", type: "POST", dataType: "json",
+                                data: {Data:notStayLeaveobj,TeacherID:vm.ClassHeadTeacherID,StudentName:vm.StudentName,oper:"insertLeaveRecord"},
                                 success: function (data,status,jqXHR) {
-                                    if (data.d > "0") {
+                                    if (data > "0") {
                                         layer.alert('提交请假单成功', { icon: 1 }, function (index) {
                                             layer.close(index);
                                             location.href = "/Stuleave/Home";
                                         });
-                                    } else {
+                                    } else if(data == "404"){
+                                        window.location.href = "../Login/index.jsp";
+                                    }else {
                                         layer.alert('提交请假单失败', { icon: 1 }, function (index) {
                                             layer.close(index);
                                             location.href = "/Stuleave/Home";
@@ -743,18 +751,20 @@
                         , yes: function (index) {
                             layer.close(index);
                             $.ajax({
-                                url: '../WebService.asmx/insertLeaveRecord', contentType: "application/json", type: "POST", dataType: "json",
-                                data: "{Data:'" + earlySelfStuLeaveobj + "',TeacherID:'" + vm.ClassHeadTeacherID + "',StudentName:'" + vm.StudentName + "'}",
+                                url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded", type: "POST", dataType: "json",
+                                data: {Data:earlySelfStuLeaveobj,TeacherID:vm.ClassHeadTeacherID ,StudentName:vm.StudentName,oper:"insertLeaveRecord"},
                                 success: function (data, status, jqXHR) {
-                                    if (data.d > "0") {
+                                    if (data > "0") {
                                         layer.alert('提交请假单成功', { icon: 1 }, function (index) {
                                             layer.close(index);
-                                            location.href = "/Stuleave/Home";
+                                            location.href = "./Home.jsp";
                                         });
+                                    }else if(data == "404"){
+                                        window.location.href = "../Login/index.jsp";
                                     } else {
                                         layer.alert('提交请假单失败', { icon: 1 }, function (index) {
                                             layer.close(index);
-                                            location.href = "/Stuleave/Home";
+                                            location.href = "./Home.jsp";
                                         });
                                     }
                                 },
@@ -844,18 +854,28 @@
                     , yes: function (index) {
                         layer.close(index);
                         $.ajax({
-                            url: '../WebService.asmx/insertIntoAdvanceDelay', contentType: "application/json", type: "POST", dataType: "json",
-                            data: '{StudentID:"' + vm.StudentNum + '",AReson:"' + vm.arriveEarlyReason + '",DReson:"' + vm.arriveLateReason + '",ZTIME:"' + ZTIME + '",WTIME:"' + WTIME + '",classID:"' + vm.classID + '",arriveCategory:"'+vm.arriveCategory+'"}',
+                            url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded", type: "POST", dataType: "json",
+                            data:{StudentID:vm.StudentNum,
+                                AReson:vm.arriveEarlyReason,
+                                DReson:vm.arriveLateReason,
+                                ZTIME:ZTIME,
+                                WTIME:WTIME,
+                                classID:vm.classID,
+                                arriveCategory:vm.arriveCategory,
+                                oper:"insertIntoAdvanceDelay"
+                            },
                             success: function (data) {
-                                if (data.d == "1") {
+                                if (data == "1") {
                                     layer.alert('提交请假单成功！。', { icon: 1 }, function (index) {
                                         layer.close(index);
-                                        location.href = "/Stuleave/Home";
+                                        location.href = "./Home.jsp";
                                     });
+                                }else if(data == "404"){
+                                    window.location.href = "../Login/index.jsp";
                                 } else {
                                     layer.alert('提交请假单失败！。', { icon: 1 }, function (index) {
                                         layer.close(index);
-                                        location.href = "/Stuleave/Home";
+                                        location.href = "./Home.jsp";
                                     });
                                 }
                             },
@@ -893,26 +913,28 @@
             },      //判断星期
             showOrhideImg: function () {
                 if (this.arriveEarly == true) {
-                    this.arriveEarlypath = "../Content/img/2.png";
+                    this.arriveEarlypath = "/Content/img/2.png";
                 } else {
-                    this.arriveEarlypath = "../Content/img/1.png";
+                    this.arriveEarlypath = "/Content/img/1.png";
                 }
 
                 if (this.arriveLate == true) {
-                    this.arriveLatepath = "../Content/img/2.png";
+                    this.arriveLatepath = "/Content/img/2.png";
                 } else {
-                    this.arriveLatepath = "../Content/img/1.png";
+                    this.arriveLatepath = "/Content/img/1.png";
                 }
             },      //早出晚归图片路径
             AdvanceDelay: function () {
                 let timenow = new Date();
                 $.ajax({
-                    url: '/WebService.asmx/selectAdvanceDelay', contentType: "application/json", type: "POST", dataType: "json",
-                    data: '{StudetnID:"' + vm.StudentNum + '"}',
+                    url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded", type: "POST", dataType: "json",
+                    data: {StudetnID:vm.StudentNum,oper:"selectAdvanceDelay"},
                     success: function (data) {
-                        let dt = data.d.split("&");
+                        //window.location.href="../Login/index.jsp";
+                        // console.log(data)
+                        let dt = data.toString().split("&");
                         if (dt[0] == "1") {  //早出
-                            vm.arriveEarlypath = "../Content/img/2.png";
+                            vm.arriveEarlypath = "/Content/img/2.png";
                             vm.arriveEarly = true;
                             vm.canAdvance = true;
                             vm.arriveEarlyReason = dt[2];
@@ -924,7 +946,7 @@
                             vm.arriveCategory = "晚归";
 
                         } else if (dt[0] == "2") { //晚归
-                            vm.arriveLatepath = "../Content/img/2.png";
+                            vm.arriveLatepath = "/Content/img/2.png";
                             vm.arriveLate = true;
                             vm.canDelay = true;
                             $("#time2").text(dt[1]);
@@ -935,7 +957,7 @@
                             //$('#WGTIME').attr("disabled", 'disabled');
                             vm.arriveCategory = "早出";
                         } else if (dt[0] == "0") {
-                            vm.arriveEarlypath = "../Content/img/2.png";
+                            vm.arriveEarlypath = "/Content/img/2.png";
                             vm.arriveEarly = true;
                             vm.canAdvance = true;
                             vm.arriveEarlyReason = dt[2];
@@ -945,7 +967,7 @@
                             /*alert(moment(dt[1]).format("HH:mm"));*/
                             //$('#ZCTIME').attr("disabled", 'disabled');
 
-                            vm.arriveLatepath = "../Content/img/2.png";
+                            vm.arriveLatepath = "/Content/img/2.png";
                             vm.arriveLate = true;
                             vm.canDelay = true;
                             $("#time2").text(dt[3]);

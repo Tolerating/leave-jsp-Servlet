@@ -110,7 +110,7 @@
           console.log(data)
           if (data == -1) {
             Messenger().post({ message: "用户民或密码错误!", showCloseButton: true, hideAfter: 5, type: "error" });
-          } else {
+          } else if(data == 1){
             Messenger().post({ message: "登录成功!", showCloseButton: true, hideAfter: 5, type: "success" });
             sessionStorage.LoginID = loginID;       //不加职称数字的
             sessionStorage.DataLoginID = username;      //加了职称数字的

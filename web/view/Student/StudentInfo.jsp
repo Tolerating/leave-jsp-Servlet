@@ -176,7 +176,7 @@
         </ul>
     </div>
 </div>
-<script src="../Scripts/jquery/jquery-2.0.3.min.js"></script>
+<script src="../../Scripts/jquery/jquery-2.0.3.min.js"></script>
 <script src="../../Scripts/jQuery-Cookie/jquery.cookie.min.js"></script>
 <script src="../../Scripts/bootstrap/js/bootstrap.min.js"></script>
 <script src="../../Scripts/vue.js"></script>
@@ -202,35 +202,42 @@
     });
     (function () {
         $.ajax({
-            url: "../WebService.asmx/GetStudentInfo",
+            url: "http://localhost:8080/login",
             type: "POST",
-            contentType: "application/json",
+            contentType: "application/x-www-form-urlencoded",
             dataType: "JSON",
+            data:{oper:"getStudentInfo"},
             async: false,
             success: function (data, status, jqXHR) {
-                stuInfo = JSON.parse(data.d);
-                $.ajax({
-                    url: "../WebService.asmx/getClassInfo",
-                    type: "POST",
-                    contentType: "application/json",
-                    dataType: "JSON",
-                    data: "{classNum:'" + stuInfo.StudentClassID + "'}",
-                    async:false,
-                    success: function (data, status, jqXHR) {
-                        classInfo = JSON.parse(data.d);
-                        $.cookie("className", classInfo.ClassName, {path:'/'});
-                        $.cookie("StudentNum", stuInfo.StudentNum);
-                        $.cookie("classID", stuInfo.StudentClassID);
-                        $.cookie("classHeadTeacherID", classInfo.ClassHeadTeacherID);
-                        $.cookie("StudentName", stuInfo.StudentName);
-                        //document.cookie = "className='" + classInfo.ClassName + "';";
-                        //document.cookie = "StudentNum='" + stuInfo.StudentNum + "';";
-                        //document.cookie = "classID='" + stuInfo.StudentClassID + "';";
-                        //document.cookie = "classHeadTeacherID='" + classInfo.ClassHeadTeacherID + "';";
-                        //document.cookie = "StudentName='" + stuInfo.StudentName + "';";
+                console.log(typeof data)
+                stuInfo = data;
+                console.log(stuInfo.studentClassId);
+                if (data == "404"){
+                    window.location.href = "../Login/index.jsp";
+                } else{
+                    $.ajax({
+                        url: "http://localhost:8080/login",
+                        type: "POST",
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "JSON",
+                        data: {classID: stuInfo.studentClassId,oper:"getClassInfo"},
+                        async:false,
+                        success: function (data, status, jqXHR) {
+                            classInfo = data;
+                            if (data == "404"){
+                                window.location.href = "../Login/index.jsp";
+                            } else{
+                                $.cookie("className", classInfo.className, {path:'/'});
+                                $.cookie("StudentNum", stuInfo.studentNum);
+                                $.cookie("classID", stuInfo.studentClassId);
+                                $.cookie("classHeadTeacherID", classInfo.classHeadTeacherId);
+                                $.cookie("StudentName", stuInfo.studentName);
+                            }
 
-                    }
-                });
+                        }
+                    });
+                }
+
             }
         });
     })();
@@ -238,15 +245,15 @@
     var vm = new Vue({
         el: "#StuIno",
         data: {
-            StudentNum: stuInfo.StudentNum,
-            StudentClassName: classInfo.ClassName,
-            StudentName: stuInfo.StudentName,
-            StudentSex: stuInfo.StudentSex,
-            StudentIDCard: stuInfo.StudentIDCard,
-            StudentBedroomNum: stuInfo.StudentBedroomNum,
-            StudentHomeAddress: stuInfo.StudentHomeAddress,
-            StudentParentTel: stuInfo.StudentParentTel,
-            StudentTel: stuInfo.StudentTel,
+            StudentNum:stuInfo.studentNum ,//
+            StudentClassName: classInfo.className,
+            StudentName: stuInfo.studentName,
+            StudentSex: stuInfo.studentSex,
+            StudentIDCard: stuInfo.studentIdCard,
+            StudentBedroomNum: stuInfo.studentBedroomNum,
+            StudentHomeAddress: stuInfo.studentHomeAddress,
+            StudentParentTel: stuInfo.studentParentTel,
+            StudentTel: stuInfo.studentTel,
             newAdnminPasssword: "",
             new2AdnminPasssword:""
         },
@@ -269,21 +276,23 @@
                             layer.close(index);
                             layer.load(1);
                             $.ajax({
-                                url: "../WebService.asmx/updateStuTel",
+                                url: "http://localhost:8080/login",
                                 type: "POST",
-                                contentType: "application/json",
+                                contentType: "application/x-www-form-urlencoded",
                                 dataType: "JSON",
                                 async: false,
-                                data: "{StuTel:'" + vm.StudentTel + "',StuNum:'" + vm.StudentNum+ "'}",
+                                data: {StuTel:vm.StudentTel,StuNum:vm.StudentNum,oper:"updateStudentTel"},
                                 success: function (data, status, jqXHR) {
-                                    if (data.d == "1") {
+                                    if (data == "1") {
                                         setTimeout(function () {
                                             layer.closeAll('loading');
                                         }, 0);
                                         layer.alert('手机号更新成功', { icon: 0 }, function (index) {
                                             layer.close(index);
                                         });
-                                    } else {
+                                    } else if(data == "404" ){
+                                        window.location.href = "../Login/index.jsp";
+                                    }else {
                                         setTimeout(function () {
                                             layer.closeAll('loading');
                                         }, 0);
@@ -315,22 +324,24 @@
                     layer.msg('两次输入的密码不一致', { icon: 5 });
                 } else {
                     $.ajax({
-                        url: "../WebService.asmx/updateStuPwd",
+                        url: "http://localhost:8080/login",
                         type: "POST",
-                        contentType: "application/json",
+                        contentType: "application/x-www-form-urlencoded",
                         dataType: "JSON",
                         async: false,
-                        data: "{StuNum:'" + this.StudentNum + "',StuPwd:'" + $.md5(this.new2AdnminPasssword) + "'}",
+                        data: {studentNum:this.StudentNum,passnew:$.md5(this.new2AdnminPasssword),oper:"updatePwd"},
                         success: function (data, status, jqXHR) {
-                            if (data.d == 1) {
+                            if (data == 1) {
                                 layer.alert('密码更新成功', { icon: 0 }, function (index) {
                                     layer.close(index);
                                     $('#myModalEdit').modal('hide');
                                     location.href = "../Login/index.jsp";
                                 });
 
-                            } else {
-                                layer.alert('手机号更新失败', { icon: 5 }, function (index) {
+                            } else if(data == "404"){
+                                window.location.href = "../Login/index.jsp";
+                            }else {
+                                layer.alert('密码更新失败', { icon: 5 }, function (index) {
                                     layer.close(index);
                                 });
                             }
