@@ -5,9 +5,10 @@
   Time: 22:14
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="../../Scripts/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
@@ -474,10 +475,10 @@
             /*早出晚归*/
             arriveEarly: false,
             canAdvance:false,               //早出是否disabled
-            arriveEarlypath: "/Content/img/2.png",     //早出图片路径
+            arriveEarlypath: "/Content/img/1.png",     //早出图片路径
             arriveLate: false,
             canDelay: false,             //晚归是否disabled
-            arriveLatepath: "/Content/img/2.png",      //晚归图片路径
+            arriveLatepath: "/Content/img/1.png",      //晚归图片路径
             arriveEarlyReason: "",
             arriveLateReason: "",
             canAdvanceDelaybtn: false,    //判断当前时间是否可以请假
@@ -525,7 +526,7 @@
                         , yes: function (index) {
                             layer.close(index);
                             $.ajax({
-                                url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded", type: "POST", dataType: "json",
+                                url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded;charset=UTF-8", type: "POST", dataType: "json",
                                 data: {Data:leaveRecordobj,TeacherID:vm.ClassHeadTeacherID,StudentName:vm.StudentName,oper:"insertLeaveRecord"},
                                 success: function (data,status,jqXHR) {
                                     if (data > "0") {
@@ -568,7 +569,7 @@
                 } else {
                     $.ajax({
                         url: 'http://localhost:8080/login',
-                        contentType: "application/x-www-form-urlencoded",
+                        contentType: "application/x-www-form-urlencoded;charset=utf-8",
                         dataType:"json",
                         type: "POST",
                         data: {starttime:weekdayStartTime,endtime:weekdayEndTime,oper:"checkWeekLeave"},
@@ -603,15 +604,15 @@
                                     comment = "";
                                 }
                                 let weekdayLeaveobj = JSON.stringify({
-                                    WeekDaysStudentID: vm.StudentNum,
-                                    WeekDaysStartTime: weekdayStartTime,
-                                    WeekDaysEndtTime: weekdayEndTime,
-                                    WeekDaysNumDays: getdayNum(weekdayEndTime, weekdayStartTime),
-                                    WeekDaysReason:vm.weekdayReason+vm.otherReason,
-                                    WeekDaysStage: "1",
-                                    WeekDaysApprovalResult: "未审核",
-                                    WeekDaysApprovalTime:moment().format("YYYY-MM-DD"),     //疑问????
-                                    LeaveRecordClassNum: vm.classID
+                                    weekDaysStudentId: vm.StudentNum,
+                                    weekDaysStartTime: weekdayStartTime,
+                                    weekDaysEndtTime: weekdayEndTime,
+                                    weekDaysNumDays: getdayNum(weekdayEndTime, weekdayStartTime),
+                                    weekDaysReason:vm.weekdayReason+vm.otherReason,
+                                    weekDaysStage: "1",
+                                    weekDaysApprovalResult: "未审核",
+                                    weekDaysApprovalTime:moment().format("YYYY-MM-DD"),     //疑问????
+                                    leaveRecordClassNum: vm.classID
                                 });
 
                                 layer.msg(comment, {
@@ -626,7 +627,7 @@
                                                 if (data == "1") {
                                                     layer.alert('提交请假单成功', { icon: 1 }, function (index) {
                                                         layer.close(index);
-                                                        location.href = "/Stuleave/Home";
+                                                        location.href = "./Home.jsp";
                                                     });
                                                 } else if(data == "404"){
                                                     window.location.href = "../Login/index.jsp";
@@ -671,18 +672,18 @@
                 } else {
                     let notStayNumDays = getdayNum(notStayEndTime, notStayStaTime);
                     let notStayLeaveobj = JSON.stringify({
-                        LeaveRecordStudentID: this.StudentNum,
-                        LeaveRecordReason: this.notStayReason,
-                        LeaveRecordStartTime: notStayStaTime,
-                        LeaveRecordEndtTime: notStayEndTime,
-                        LeaveRecordStartLesson: 0,
-                        LeaveRecordEndLesson: 0,
-                        LeaveRecordCategory: "2",
-                        LeaveRecordNumDays: notStayNumDays,
-                        LeaveRecordStage: 1,
-                        LeaveRecordApprovalResult: "待审核",
-                        LeaveRecordSumLesson: 0,
-                        LeaveRecordClassNum: this.classID
+                        leaveRecordStudentId: this.StudentNum,
+                        leaveRecordReason: this.notStayReason,
+                        leaveRecordStartTime: notStayStaTime,
+                        leaveRecordEndtTime: notStayEndTime,
+                        leaveRecordStartLesson: 0,
+                        leaveRecordEndLesson: 0,
+                        leaveRecordCategory: "2",
+                        leaveRecordNumDays: notStayNumDays,
+                        leaveRecordStage: 1,
+                        leaveRecordApprovalResult: "待审核",
+                        leaveRecordSumLesson: 0,
+                        leaveRecordClassNum: this.classID
                     });
                     layer.msg('不留宿请假：因(' + this.notStayReason + ')事由，需请假<br />(' + notStayNumDays + ')天不留宿住校,<br />请假时间：' + notStayStaTime + '到<br />' + notStayEndTime + '止。', {
                         time: 0 //不自动关闭
@@ -690,20 +691,20 @@
                         , yes: function (index) {
                             layer.close(index);
                             $.ajax({
-                                url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded", type: "POST", dataType: "json",
+                                url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded;charset=utf-8", type: "POST", dataType: "json",
                                 data: {Data:notStayLeaveobj,TeacherID:vm.ClassHeadTeacherID,StudentName:vm.StudentName,oper:"insertLeaveRecord"},
                                 success: function (data,status,jqXHR) {
                                     if (data > "0") {
                                         layer.alert('提交请假单成功', { icon: 1 }, function (index) {
                                             layer.close(index);
-                                            location.href = "/Stuleave/Home";
+                                            location.href = "./Home.jsp";
                                         });
                                     } else if(data == "404"){
                                         window.location.href = "../Login/index.jsp";
                                     }else {
                                         layer.alert('提交请假单失败', { icon: 1 }, function (index) {
                                             layer.close(index);
-                                            location.href = "/Stuleave/Home";
+                                            location.href = "./Home.jsp";
                                         });
                                     }
                                 },
@@ -732,18 +733,18 @@
                 } else {
                     let earlySelfNumDays = getdayNum(earlySelfEndTime, earlySelfStaTime);
                     let earlySelfStuLeaveobj = JSON.stringify({
-                        LeaveRecordStudentID: this.StudentNum,
-                        LeaveRecordReason: this.earlySelfStureason,
-                        LeaveRecordStartTime: earlySelfStaTime,
-                        LeaveRecordEndtTime: earlySelfEndTime,
-                        LeaveRecordStartLesson: 0,
-                        LeaveRecordEndLesson: 0,
-                        LeaveRecordCategory: "3",
-                        LeaveRecordNumDays: earlySelfNumDays,
-                        LeaveRecordStage: 1,
-                        LeaveRecordApprovalResult: "待审核",
-                        LeaveRecordSumLesson: 0,
-                        LeaveRecordClassNum: this.classID
+                        leaveRecordStudentId: this.StudentNum,
+                        leaveRecordReason: this.earlySelfStureason,
+                        leaveRecordStartTime: earlySelfStaTime,
+                        leaveRecordEndtTime: earlySelfEndTime,
+                        leaveRecordStartLesson: 0,
+                        leaveRecordEndLesson: 0,
+                        leaveRecordCategory: "3",
+                        leaveRecordNumDays: earlySelfNumDays,
+                        leaveRecordStage: 1,
+                        leaveRecordApprovalResult: "待审核",
+                        leaveRecordSumLesson: 0,
+                        leaveRecordClassNum: this.classID
                     });
                     layer.msg('早自习请假：因(' + this.earlySelfStureason + ')事由，需<br />请假(' + earlySelfNumDays + ')天早自习,请假时间：' + earlySelfStaTime + '到<br />' + earlySelfEndTime + '止，总计' + earlySelfNumDays + '天。', {
                         time: 0 //不自动关闭
@@ -751,7 +752,7 @@
                         , yes: function (index) {
                             layer.close(index);
                             $.ajax({
-                                url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded", type: "POST", dataType: "json",
+                                url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded;charset=utf-8", type: "POST", dataType: "json",
                                 data: {Data:earlySelfStuLeaveobj,TeacherID:vm.ClassHeadTeacherID ,StudentName:vm.StudentName,oper:"insertLeaveRecord"},
                                 success: function (data, status, jqXHR) {
                                     if (data > "0") {
@@ -854,13 +855,14 @@
                     , yes: function (index) {
                         layer.close(index);
                         $.ajax({
-                            url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded", type: "POST", dataType: "json",
-                            data:{StudentID:vm.StudentNum,
-                                AReson:vm.arriveEarlyReason,
-                                DReson:vm.arriveLateReason,
-                                ZTIME:ZTIME,
-                                WTIME:WTIME,
-                                classID:vm.classID,
+                            url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded;charset=utf-8", type: "POST", dataType: "json",
+                            data:{
+                                studentNum:vm.StudentNum,
+                                advanceReson:vm.arriveEarlyReason,
+                                deatReson:vm.arriveLateReason,
+                                advanceStudentT:ZTIME,
+                                delayStudentT:WTIME,
+                                classNum:vm.classID,
                                 arriveCategory:vm.arriveCategory,
                                 oper:"insertIntoAdvanceDelay"
                             },
@@ -927,12 +929,13 @@
             AdvanceDelay: function () {
                 let timenow = new Date();
                 $.ajax({
-                    url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded", type: "POST", dataType: "json",
+                    url: 'http://localhost:8080/login', contentType: "application/x-www-form-urlencoded;charset=utf-8", type: "POST", dataType: "text",
                     data: {StudetnID:vm.StudentNum,oper:"selectAdvanceDelay"},
                     success: function (data) {
                         //window.location.href="../Login/index.jsp";
-                        // console.log(data)
+                        console.log(data)
                         let dt = data.toString().split("&");
+                        console.log(dt);
                         if (dt[0] == "1") {  //早出
                             vm.arriveEarlypath = "/Content/img/2.png";
                             vm.arriveEarly = true;

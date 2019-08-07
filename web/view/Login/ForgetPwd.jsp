@@ -76,7 +76,7 @@
                 url: "http://localhost:8080/login",
                 type: "POST",
                 dataType: "json",
-                contentType: "application/x-www-form-urlencoded",
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
                 data: {studentNum:username,oper:"forgetPwd"},
                 success: function (data, status, jqXHR) {
                     if (data == -7) {
@@ -115,7 +115,7 @@
                 url: "http://localhost:8080/login",
                 type: "POST",
                 dataType: "json",
-                contentType: "application/x-www-form-urlencoded",
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
                 data: {studentNum:username,Code:code,oper:"checkCode"},
                 success: function (data, status, jqXHR) {
                     //console.log(data);

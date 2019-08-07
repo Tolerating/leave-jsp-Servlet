@@ -159,23 +159,6 @@
 
     </div>
 </section>
-
-
-
-<div class="container ">
-    <footer>
-        <p class="text-center">温州科技职业学院</p>
-    </footer>
-    <div class="row footer-bottom">
-        <ul class="list-inline text-center">
-            <li><a href="http://www.miibeian.gov.cn/" target="_blank">浙ICP备09056233号</a></li>
-            <li>浙公网安备 33030402000424号 </li>
-            <!--
-            <li><a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备11008151号</a></li>
-            <li>京公网安备11010802014853</li>-->
-        </ul>
-    </div>
-</div>
 <script src="../../Scripts/jquery/jquery-2.0.3.min.js"></script>
 <script src="../../Scripts/jQuery-Cookie/jquery.cookie.min.js"></script>
 <script src="../../Scripts/bootstrap/js/bootstrap.min.js"></script>
@@ -218,7 +201,7 @@
                     $.ajax({
                         url: "http://localhost:8080/login",
                         type: "POST",
-                        contentType: "application/x-www-form-urlencoded",
+                        contentType: "application/x-www-form-urlencoded;charset=utf-8",
                         dataType: "JSON",
                         data: {classID: stuInfo.studentClassId,oper:"getClassInfo"},
                         async:false,
@@ -278,7 +261,7 @@
                             $.ajax({
                                 url: "http://localhost:8080/login",
                                 type: "POST",
-                                contentType: "application/x-www-form-urlencoded",
+                                contentType: "application/x-www-form-urlencoded;charset=utf-8",
                                 dataType: "JSON",
                                 async: false,
                                 data: {StuTel:vm.StudentTel,StuNum:vm.StudentNum,oper:"updateStudentTel"},
@@ -326,7 +309,7 @@
                     $.ajax({
                         url: "http://localhost:8080/login",
                         type: "POST",
-                        contentType: "application/x-www-form-urlencoded",
+                        contentType: "application/x-www-form-urlencoded;charset=utf-8",
                         dataType: "JSON",
                         async: false,
                         data: {studentNum:this.StudentNum,passnew:$.md5(this.new2AdnminPasssword),oper:"updatePwd"},

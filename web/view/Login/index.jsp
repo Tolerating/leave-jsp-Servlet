@@ -29,7 +29,7 @@
   <br />
   <div class="row">
     <div class="col-md-12 text-center">
-      <h2><a class="fontsize1-4" style="color:black;">高职学校请假通软件后台</a></h2>
+      <h2><a class="fontsize1-4" style="color:black;">学生请假系统</a></h2>
     </div>
   </div>
   <div class="row">
@@ -38,22 +38,22 @@
         <h2>登录</h2>
         <div class="form-group">
           <label for="username" class="sr-only">用户名</label>
-          <input type="text" class="form-control" id="UserID" placeholder="请输入工号" autocomplete="off" onblur="judgeUserID()"/>
+          <input type="text" class="form-control" id="UserID" placeholder="请输入学号" autocomplete="off" onblur="judgeUserID()"/>
         </div>
         <div class="form-group">
           <label for="password" class="sr-only">密码</label>
           <input type="password" class="form-control" id="password" placeholder="请输入密码" autocomplete="off" onblur="judgePwd()"/>
         </div>
-        <div class="form-group" id="base">
-          <select id="post1" class="selectpicker form-control">
-            <option value="0">学生</option>
-            <option value="1">班主任</option>
-            <option value="2">辅导员</option>
-            <option value="3">院领导</option>
-            <option value="4">校领导</option>
-            <option value="5">公寓中心</option>
-          </select>
-        </div>
+<%--        <div class="form-group" id="base">--%>
+<%--          <select id="post1" class="selectpicker form-control">--%>
+<%--            <option value="0">学生</option>--%>
+<%--            <option value="1">班主任</option>--%>
+<%--            <option value="2">辅导员</option>--%>
+<%--            <option value="3">院领导</option>--%>
+<%--            <option value="4">校领导</option>--%>
+<%--            <option value="5">公寓中心</option>--%>
+<%--          </select>--%>
+<%--        </div>--%>
         <div class="form-group">
           <button id="btnLogin" type="button" class="btn btn-primary form-control" onclick="loginLeave()">登录</button>
         </div>
@@ -89,23 +89,19 @@
     var username = document.getElementById("UserID").value.trim();
     var loginID = username;
     var userPwd = document.getElementById("password").value;
-    var postName = document.getElementById("post1");
-    var post = document.getElementById("post1").value;
     if (username == "") {
       layer.msg('工号不能为空', { icon: 5 });
     } else if (userPwd.trim() == "") {
       layer.msg('密码不能为空', { icon: 5 });
     } else {
-      if (post != 0){
-        username += post;
-      }
       var pwd = $.md5(userPwd);
       $.ajax({
         url:'http://localhost:8080/login',
         type: "POST",
-        contentType: "application/x-www-form-urlencoded",
+        contentType: "application/x-www-form-urlencoded;charset=utf-8",
         datatype: "json",
-        data: {Name:username ,Pwd: pwd,Post:postName.options[postName.selectedIndex].text ,oper:"loginLeave"},
+        data: {Name:username ,Pwd: pwd,oper:"loginLeave"},
+        //data:"{Name:'"+username+"'}",
         success: function (data, textstatus, jqXHR) {
           console.log(data)
           if (data == -1) {
@@ -114,7 +110,6 @@
             Messenger().post({ message: "登录成功!", showCloseButton: true, hideAfter: 5, type: "success" });
             sessionStorage.LoginID = loginID;       //不加职称数字的
             sessionStorage.DataLoginID = username;      //加了职称数字的
-            sessionStorage.Post = postName.options[postName.selectedIndex].text;
             sessionStorage.Pwd = pwd;
             location.href = "../Student/StudentInfo.jsp";
           }

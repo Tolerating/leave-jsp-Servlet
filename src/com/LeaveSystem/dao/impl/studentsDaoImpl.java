@@ -80,11 +80,11 @@ public class studentsDaoImpl implements studentsDao {
                 ad.setZcwgid(rs.getInt("Zcwgid"));
                 ad.setStudentNum(rs.getString("StudentNum"));
                 ad.setAdvanceReson(rs.getString("AdvanceReson"));
-                ad.setAdvanceStudentT(rs.getTimestamp("AdvanceStudentT"));
-                ad.setAdvanceTime(rs.getTimestamp("AdvanceTime"));
+                ad.setAdvanceStudentT(rs.getString("AdvanceStudentT"));
+                ad.setAdvanceTime(rs.getString("AdvanceTime"));
                 ad.setDeatReson(rs.getString("DeatReson"));
-                ad.setDelayStudentT(rs.getTimestamp("DelayStudentT"));
-                ad.setDelayTime(rs.getTimestamp("DelayTime"));
+                ad.setDelayStudentT(rs.getString("DelayStudentT"));
+                ad.setDelayTime(rs.getString("DelayTime"));
                 ad.setClassNum(rs.getString("ClassNum"));
             }
         }catch (Exception e){
@@ -182,13 +182,17 @@ public class studentsDaoImpl implements studentsDao {
     @Override
     public int checkWeekLeave(String starttime, String endtime,String studentNum) {
         Connection conn = tools.ConnSql();
-        Statement smt = null;
+        PreparedStatement smt = null;
+        ResultSet rs = null;
         int result = 0;
         String sql = String.format("SELECT COUNT(*) FROM [WeekDays] WHERE WeekDaysStudentID='%s' and (WeekDaysStartTime between '%s' and '%s') and (WeekDaysEndtTime between '%s' and '%s');",studentNum,starttime,endtime,starttime,endtime);
         System.out.println(sql);
         try {
-            smt = conn.createStatement();
-            result = smt.executeUpdate(sql);
+            smt = conn.prepareStatement(sql);
+            rs = smt.executeQuery();
+            while (rs.next()){
+                result = rs.getInt(1);
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }finally {
@@ -219,14 +223,14 @@ public class studentsDaoImpl implements studentsDao {
         try {
             smt = conn.prepareStatement(sql);
             smt.setLong(1,model.getWeekDaysStudentId());
-            smt.setTimestamp(2,model.getWeekDaysStartTime());
-            smt.setTimestamp(3,model.getWeekDaysEndtTime());
+            smt.setString(2,model.getWeekDaysStartTime());
+            smt.setString(3,model.getWeekDaysEndtTime());
             smt.setString(4,model.getWeekDaysNumDays());
             smt.setString(5,model.getWeekDaysReason());
             smt.setString(6,model.getWeekDaysApprover());
             smt.setString(7,model.getWeekDaysStage());
             smt.setString(8,model.getWeekDaysApprovalResult());
-            smt.setTimestamp(9,model.getWeekDaysApprovalTime());
+            smt.setString(9,model.getWeekDaysApprovalTime());
             smt.setString(10,model.getLeaveRecordClassNum());
             result = smt.executeUpdate();
         }catch (SQLException e){
@@ -266,7 +270,7 @@ public class studentsDaoImpl implements studentsDao {
             psmt.setString(9,model.getLeaveRecordApprover());
             psmt.setLong(10,model.getLeaveRecordStage());
             psmt.setString(11,model.getLeaveRecordApprovalResult());
-            psmt.setTimestamp(12,model.getLeaveRecordApprovalTime());
+            psmt.setString(12,model.getLeaveRecordApprovalTime());
             psmt.setLong(13,model.getLeaveRecordSumLesson());
             psmt.setString(14,model.getLeaveRecordClassNum());
             result = psmt.executeUpdate();
@@ -293,17 +297,17 @@ public class studentsDaoImpl implements studentsDao {
         Connection conn = tools.ConnSql();
         PreparedStatement psmt = null;
         int result = 0;
-        String sql = "INSERT INTO [AdvanceDelay] ([StudentNum],[ClassNum],[AdvanceTime],[AdvanceReson],[AdvanceStudentT],[DelayTime],[DeatReson],[DelayStudentT]) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO [AdvanceDelay] ([StudentNum],[ClassNum],[AdvanceTime],[AdvanceReson],[AdvanceStudentT],[DelayTime],[DeatReson],[DelayStudentT]) VALUES (?,?,?,?,?,?,?,?)";
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1,model.getStudentNum());
             psmt.setString(2,model.getClassNum());
-            psmt.setTimestamp(3,model.getAdvanceTime());
+            psmt.setString(3,model.getAdvanceTime());
             psmt.setString(4,model.getAdvanceReson());
-            psmt.setTimestamp(5,model.getAdvanceStudentT());
-            psmt.setTimestamp(6,model.getDelayTime());
+            psmt.setString(5,model.getAdvanceStudentT());
+            psmt.setString(6,model.getDelayTime());
             psmt.setString(7,model.getDeatReson());
-            psmt.setTimestamp(8,model.getDelayStudentT());
+            psmt.setString(8,model.getDelayStudentT());
             result = psmt.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
@@ -333,12 +337,12 @@ public class studentsDaoImpl implements studentsDao {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1,model.getStudentNum());
             psmt.setString(2,model.getClassNum());
-            psmt.setTimestamp(3,model.getAdvanceTime());
+            psmt.setString(3,model.getAdvanceTime());
             psmt.setString(4,model.getAdvanceReson());
-            psmt.setTimestamp(5,model.getAdvanceStudentT());
-            psmt.setTimestamp(6,model.getDelayTime());
+            psmt.setString(5,model.getAdvanceStudentT());
+            psmt.setString(6,model.getDelayTime());
             psmt.setString(7,model.getDeatReson());
-            psmt.setTimestamp(8,model.getDelayStudentT());
+            psmt.setString(8,model.getDelayStudentT());
             psmt.setInt(9,model.getZcwgid());
             result = psmt.executeUpdate();
         }catch (SQLException e){

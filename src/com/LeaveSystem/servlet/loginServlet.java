@@ -9,12 +9,17 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.lang.Class;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.LeaveSystem.model.*;
 import com.LeaveSystem.service.impl.*;
 import net.sf.json.JSON;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import net.sf.json.JSONObject;
+import org.omg.PortableInterceptor.INACTIVE;
 
 
 @WebServlet(name = "login",value = "/login")
@@ -26,6 +31,7 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
+//        System.out.println(req.getCharacterEncoding());
         resp.setContentType("text/json;charset=utf-8");
         String oper = req.getParameter("oper");
         System.out.println(oper);
@@ -57,17 +63,14 @@ public class loginServlet extends HttpServlet {
         }else if("insertLeaveRecord".equals(oper)){
             insertLeaveRecord(req,resp);
         }else if("InsertWeekDays".equals(oper)){
-
+            InsertWeekDays(req,resp);
         }else if("checkWeekLeave".equals(oper)){
-
+            checkWeekLeave(req,resp);
         }else if("insertIntoAdvanceDelay".equals(oper)){
-
+            insertIntoAdvanceDelay(req,resp);
         }else{
             System.out.println("没有找到对应的操作符" + oper);
         }
-
-
-
     }
 
     /**
@@ -79,6 +82,7 @@ public class loginServlet extends HttpServlet {
     private void loginLeave(HttpServletRequest req,HttpServletResponse resp) throws IOException {
 
         String name = req.getParameter("Name");
+        System.out.println(name);
         String pwd = req.getParameter("Pwd");
         String result = "";
         AdminInfo model = lgService.loginLeave(name,pwd);
@@ -240,20 +244,21 @@ public class loginServlet extends HttpServlet {
      * @throws IOException
      */
     private void selectAdvanceDelay(HttpServletRequest req,HttpServletResponse resp) throws IOException{
+        resp.setContentType("text/plain;charset=utf-8");
         HttpSession session = req.getSession(true);
         AdminInfo admin = (AdminInfo)session.getAttribute("AdminInfo");
         String result = "";
-        AdvanceDelay ad = stuService.selectAdvanceDelay(Integer.toString(admin.getAdminID()));
+        AdvanceDelay ad = stuService.selectAdvanceDelay(Integer.toString(admin.getAdminLoginID()));
         System.out.println(ad.getDelayStudentT());
         if (ad.getZcwgid() != 0){
-            if (ad.getAdvanceReson() != "" && ad.getDeatReson() == ""){
+            if ( !"".equals(ad.getAdvanceReson()) && "".equals(ad.getDeatReson())){
                 //早出请假
-                result = "1&" + ad.getAdvanceStudentT() + "&" + ad.getAdvanceReson() + "";
-            }else if(ad.getAdvanceReson() == "" && ad.getDeatReson() != ""){
+                result = String.format("1&%s&%s",ad.getAdvanceStudentT(),ad.getAdvanceReson());
+            }else if("".equals(ad.getAdvanceReson()) && !"".equals(ad.getDeatReson())){
                 //晚归请假
-                result = "2&" + ad.getDelayStudentT() + "&" + ad.getDeatReson() + "";
+                result = String.format("2&%s&%s",ad.getDelayStudentT(),ad.getDeatReson());
             }else{
-                result = "0&" + ad.getAdvanceStudentT() + "&" + ad.getAdvanceReson() + "&" + ad.getDelayStudentT() + "&" + ad.getDeatReson() + "";
+                result = String.format("0&%s&%s&%s&%s",ad.getAdvanceStudentT(),ad.getAdvanceReson(),ad.getDelayStudentT(),ad.getDeatReson());
             }
         }else{
             result = "3";
@@ -264,30 +269,35 @@ public class loginServlet extends HttpServlet {
 
     }
 
+    /**
+     *  插入上课请假 , 早自习请假 , 不留宿请假
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws IOException
+     */
     private void insertLeaveRecord(HttpServletRequest req,HttpServletResponse resp) throws IOException{
         String data = req.getParameter("Data");
         String studentName = req.getParameter("StudentName");
         String teacherId = req.getParameter("TeacherID");
         String result = "-1";
         JSONObject jsonObject = JSONObject.fromObject(data);
-        LeaveRecord leaveRecord = new LeaveRecord();
-        Object obj = JSONObject.toBean(jsonObject);
-        LeaveRecord lea = (LeaveRecord)obj;
+        LeaveRecord lea = (LeaveRecord)JSONObject.toBean(jsonObject,LeaveRecord.class);
+        System.out.println(lea);
         if (stuService.insertLeaveRecord(lea) == 1){
             Teachers tea = stuService.selectTeacherByNum(teacherId);
-            if (lea.getLeaveRecordCategory() == "1" && tea.getTeacherId() != 0)
+            if ("1".equals(lea.getLeaveRecordCategory()) && tea.getTeacherId() != 0)
             {
                 result = tools.compStuContent(lea.getLeaveRecordCategory(), tea.getTeacherTel(), tea.getTeacherName(), studentName, lea.getLeaveRecordStudentId(), lea.getLeaveRecordReason(), lea.getLeaveRecordSumLesson(), lea.getLeaveRecordStartTime().toString(), lea.getLeaveRecordStartLesson(), lea.getLeaveRecordEndtTime().toString(), lea.getLeaveRecordEndLesson(), lea.getLeaveRecordNumDays());
             }
-            else if (lea.getLeaveRecordCategory() == "2" && tea.getTeacherId() != 0)
+            else if ("2".equals(lea.getLeaveRecordCategory()) && tea.getTeacherId() != 0)
             {
                 result = tools.compStuContent(lea.getLeaveRecordCategory(), tea.getTeacherTel(), tea.getTeacherName(), studentName, lea.getLeaveRecordStudentId(), lea.getLeaveRecordReason(), 0, lea.getLeaveRecordStartTime().toString(), 0, lea.getLeaveRecordEndtTime().toString(), 0, lea.getLeaveRecordNumDays());
             }
-            else if (lea.getLeaveRecordCategory() == "3" && tea.getTeacherId() != 0)
+            else if ("3".equals(lea.getLeaveRecordCategory()) && tea.getTeacherId() != 0)
             {
                 result = tools.compStuContent(lea.getLeaveRecordCategory(), tea.getTeacherTel(), tea.getTeacherName(), studentName, lea.getLeaveRecordStudentId(), lea.getLeaveRecordReason(), 0, lea.getLeaveRecordStartTime().toString(), 0, lea.getLeaveRecordEndtTime().toString(), 0, lea.getLeaveRecordNumDays());
             }
-            else if (lea.getLeaveRecordCategory() == "4" && tea.getTeacherId() != 0)
+            else if ("4".equals(lea.getLeaveRecordCategory()) && tea.getTeacherId() != 0)
             {
                 result = tools.compStuContent(lea.getLeaveRecordCategory(), tea.getTeacherTel(), tea.getTeacherName(), studentName, lea.getLeaveRecordStudentId(), lea.getLeaveRecordReason(), 0, lea.getLeaveRecordStartTime().toString(), 0, lea.getLeaveRecordEndtTime().toString(), 0, lea.getLeaveRecordNumDays());
             }
@@ -296,6 +306,99 @@ public class loginServlet extends HttpServlet {
         }
         Writer out = resp.getWriter();
         out.write(result);
+        out.flush();
+    }
+
+    /**
+     * 插入周末请假
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws IOException
+     */
+    private void InsertWeekDays(HttpServletRequest req,HttpServletResponse resp) throws IOException{
+        String data = req.getParameter("Data");
+        JSONObject jsonObject = JSONObject.fromObject(data);
+        WeekDays week = (WeekDays)JSONObject.toBean(jsonObject,WeekDays.class);
+        int result = stuService.InsertWeekDays(week);
+        Writer out = resp.getWriter();
+        out.write(Integer.toString(result));
+        out.flush();
+    }
+
+    /**
+     * 检查本周末是否请假
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws IOException
+     */
+    private void checkWeekLeave(HttpServletRequest req,HttpServletResponse resp) throws IOException{
+        HttpSession session = req.getSession(true);
+        int studentNum = ((AdminInfo)session.getAttribute("AdminInfo")).getAdminLoginID();
+        String startTime = req.getParameter("starttime");
+        String endTime = req.getParameter("endtime");
+        int result = stuService.checkWeekLeave(startTime,endTime,Integer.toString(studentNum));
+        Writer out = resp.getWriter();
+        out.write(Integer.toString(result));
+        out.flush();
+    }
+
+    /**
+     * 插入 + 更新早出晚归请假
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws IOException
+     */
+    private void insertIntoAdvanceDelay(HttpServletRequest req,HttpServletResponse resp) throws IOException{
+        String studentNum = req.getParameter("studentNum");
+        String advanceReson = req.getParameter("advanceReson");
+        String deatReson = req.getParameter("deatReson");
+        String advanceStudentT = req.getParameter("advanceStudentT");
+        String delayStudentT = req.getParameter("delayStudentT");
+        String classNum = req.getParameter("classNum");
+        String arriveCategory = req.getParameter("arriveCategory");
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        int numof = 0;
+        AdvanceDelay ad = new AdvanceDelay();
+        ad = stuService.selectAdvanceDelay(studentNum);
+        if (ad != null){
+            numof = ad.getZcwgid();
+        }
+        ad.setClassNum(classNum);
+        ad.setStudentNum(studentNum);
+        if (arriveCategory == "晚归")
+        {
+            ad.setDelayTime(sdf.format(date));
+            ad.setDeatReson(deatReson);
+            ad.setDelayStudentT(delayStudentT);
+        }
+        else if (arriveCategory == "早出")
+        {
+            ad.setAdvanceReson(advanceReson);
+            ad.setAdvanceTime(sdf.format(date));
+            ad.setAdvanceStudentT(advanceStudentT);
+        }
+        else
+        {
+            ad.setDelayTime(sdf.format(date));
+            ad.setDeatReson(deatReson);
+            ad.setDelayStudentT(delayStudentT);
+            ad.setAdvanceReson(advanceReson);
+            ad.setAdvanceTime(sdf.format(date));
+            ad.setAdvanceStudentT(advanceStudentT);
+        }
+        int numInto = 0;
+        if (numof == 0)
+        {
+            numInto = stuService.insertIntoAdvanceDelay(ad);
+        }
+        else
+        {
+            numInto = stuService.updateAdvanceDelay(ad);
+        }
+        Writer out = resp.getWriter();
+        out.write(Integer.toString(numInto));
         out.flush();
     }
 }

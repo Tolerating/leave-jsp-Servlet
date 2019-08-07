@@ -103,9 +103,10 @@
       $.ajax({
         url:'http://localhost:8080/login',
         type: "POST",
-        contentType: "application/x-www-form-urlencoded",
+        contentType: "application/x-www-form-urlencoded;charset=utf-8",//
         datatype: "json",
         data: {Name:username ,Pwd: pwd,Post:postName.options[postName.selectedIndex].text ,oper:"loginLeave"},
+        //data:"{Name:'"+username+"'}",
         success: function (data, textstatus, jqXHR) {
           console.log(data)
           if (data == -1) {

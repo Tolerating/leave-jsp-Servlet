@@ -218,7 +218,7 @@
                     $.ajax({
                         url: "http://localhost:8080/login",
                         type: "POST",
-                        contentType: "application/x-www-form-urlencoded",
+                        contentType: "application/x-www-form-urlencoded;charset=utf-8",
                         dataType: "JSON",
                         data: {classID: stuInfo.studentClassId,oper:"getClassInfo"},
                         async:false,
@@ -278,7 +278,7 @@
                             $.ajax({
                                 url: "http://localhost:8080/login",
                                 type: "POST",
-                                contentType: "application/x-www-form-urlencoded",
+                                contentType: "application/x-www-form-urlencoded;charset=utf-8",
                                 dataType: "JSON",
                                 async: false,
                                 data: {StuTel:vm.StudentTel,StuNum:vm.StudentNum,oper:"updateStudentTel"},
@@ -326,7 +326,7 @@
                     $.ajax({
                         url: "http://localhost:8080/login",
                         type: "POST",
-                        contentType: "application/x-www-form-urlencoded",
+                        contentType: "application/x-www-form-urlencoded;charset=utf-8",
                         dataType: "JSON",
                         async: false,
                         data: {studentNum:this.StudentNum,passnew:$.md5(this.new2AdnminPasssword),oper:"updatePwd"},

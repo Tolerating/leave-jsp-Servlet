@@ -95,7 +95,7 @@
                 } else {
                     $.ajax({
                         url: 'http://localhost:8080/login',
-                        contentType: "application/x-www-form-urlencoded",
+                        contentType: "application/x-www-form-urlencoded;charset=utf-8",
                         type: "POST", dataType: "json",
                         data: {studentNum:username ,passnew:$.md5(this.pwdtwo),oper:"updatePwd"},
                         success: function (data) {

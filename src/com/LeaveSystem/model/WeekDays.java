@@ -5,14 +5,14 @@ public class WeekDays {
 
   private long weekDaysId;
   private long weekDaysStudentId;
-  private java.sql.Timestamp weekDaysStartTime;
-  private java.sql.Timestamp weekDaysEndtTime;
+  private String weekDaysStartTime;
+  private String weekDaysEndtTime;
   private String weekDaysNumDays;
   private String weekDaysReason;
   private String weekDaysApprover;
   private String weekDaysStage;
   private String weekDaysApprovalResult;
-  private java.sql.Timestamp weekDaysApprovalTime;
+  private String weekDaysApprovalTime;
   private String leaveRecordClassNum;
 
 
@@ -34,20 +34,20 @@ public class WeekDays {
   }
 
 
-  public java.sql.Timestamp getWeekDaysStartTime() {
+  public String getWeekDaysStartTime() {
     return weekDaysStartTime;
   }
 
-  public void setWeekDaysStartTime(java.sql.Timestamp weekDaysStartTime) {
+  public void setWeekDaysStartTime(String weekDaysStartTime) {
     this.weekDaysStartTime = weekDaysStartTime;
   }
 
 
-  public java.sql.Timestamp getWeekDaysEndtTime() {
+  public String getWeekDaysEndtTime() {
     return weekDaysEndtTime;
   }
 
-  public void setWeekDaysEndtTime(java.sql.Timestamp weekDaysEndtTime) {
+  public void setWeekDaysEndtTime(String weekDaysEndtTime) {
     this.weekDaysEndtTime = weekDaysEndtTime;
   }
 
@@ -97,11 +97,11 @@ public class WeekDays {
   }
 
 
-  public java.sql.Timestamp getWeekDaysApprovalTime() {
+  public String getWeekDaysApprovalTime() {
     return weekDaysApprovalTime;
   }
 
-  public void setWeekDaysApprovalTime(java.sql.Timestamp weekDaysApprovalTime) {
+  public void setWeekDaysApprovalTime(String weekDaysApprovalTime) {
     this.weekDaysApprovalTime = weekDaysApprovalTime;
   }
 

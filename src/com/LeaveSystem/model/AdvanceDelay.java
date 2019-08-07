@@ -6,12 +6,12 @@ public class AdvanceDelay {
   private int zcwgid;
   private String studentNum;
   private String classNum;
-  private java.sql.Timestamp advanceTime;
+  private String advanceTime;
   private String advanceReson;
-  private java.sql.Timestamp advanceStudentT;
-  private java.sql.Timestamp delayTime;
+  private String advanceStudentT;
+  private String delayTime;
   private String deatReson;
-  private java.sql.Timestamp delayStudentT;
+  private String delayStudentT;
 
 
   public int getZcwgid() {
@@ -41,11 +41,11 @@ public class AdvanceDelay {
   }
 
 
-  public java.sql.Timestamp getAdvanceTime() {
+  public String getAdvanceTime() {
     return advanceTime;
   }
 
-  public void setAdvanceTime(java.sql.Timestamp advanceTime) {
+  public void setAdvanceTime(String advanceTime) {
     this.advanceTime = advanceTime;
   }
 
@@ -59,20 +59,20 @@ public class AdvanceDelay {
   }
 
 
-  public java.sql.Timestamp getAdvanceStudentT() {
+  public String getAdvanceStudentT() {
     return advanceStudentT;
   }
 
-  public void setAdvanceStudentT(java.sql.Timestamp advanceStudentT) {
+  public void setAdvanceStudentT(String advanceStudentT) {
     this.advanceStudentT = advanceStudentT;
   }
 
 
-  public java.sql.Timestamp getDelayTime() {
+  public String getDelayTime() {
     return delayTime;
   }
 
-  public void setDelayTime(java.sql.Timestamp delayTime) {
+  public void setDelayTime(String delayTime) {
     this.delayTime = delayTime;
   }
 
@@ -86,11 +86,11 @@ public class AdvanceDelay {
   }
 
 
-  public java.sql.Timestamp getDelayStudentT() {
+  public String getDelayStudentT() {
     return delayStudentT;
   }
 
-  public void setDelayStudentT(java.sql.Timestamp delayStudentT) {
+  public void setDelayStudentT(String delayStudentT) {
     this.delayStudentT = delayStudentT;
   }
 

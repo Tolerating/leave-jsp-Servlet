@@ -15,7 +15,7 @@ public class LeaveRecord {
   private String leaveRecordApprover;
   private long leaveRecordStage;
   private String leaveRecordApprovalResult;
-  private java.sql.Timestamp leaveRecordApprovalTime;
+  private String leaveRecordApprovalTime;
   private long leaveRecordSumLesson;
   private String leaveRecordClassNum;
 
@@ -128,11 +128,11 @@ public class LeaveRecord {
   }
 
 
-  public java.sql.Timestamp getLeaveRecordApprovalTime() {
+  public String getLeaveRecordApprovalTime() {
     return leaveRecordApprovalTime;
   }
 
-  public void setLeaveRecordApprovalTime(java.sql.Timestamp leaveRecordApprovalTime) {
+  public void setLeaveRecordApprovalTime(String leaveRecordApprovalTime) {
     this.leaveRecordApprovalTime = leaveRecordApprovalTime;
   }
 

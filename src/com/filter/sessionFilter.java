@@ -12,6 +12,7 @@ import java.io.Writer;
 public class sessionFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+//        System.out.println(servletRequest.getCharacterEncoding());
         HttpSession session = ((HttpServletRequest)servletRequest).getSession(true);
         String oper = servletRequest.getParameter("oper");
         if (session.getAttribute("AdminInfo") == null){
